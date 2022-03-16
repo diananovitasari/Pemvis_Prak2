@@ -1,97 +1,98 @@
-# Diana Novita sari
-# 200511397012
+# Diana Novita sari 
+# 20051397012
 # MI2020B
 
+# matriks ordo 3 x 3
+
+from typing import List
+
+
 class Matriks:
-    def __init__(self):
-        # atur nilai matrix A dan matrix B
-        self.matrix_A = [[3, -2], [4, 5]]
-        self.matrix_B = [[5, 1], [-1, 2]]
- 
-        # hitung ukuran baris dan kolom
-        self.barMatA = len(self.matrix_A)    # jumlah baris A
-        self.kolMatA = len(self.matrix_A[0]) # jumlah kolom A
-        self.barMatB = len(self.matrix_B)    # jumlah baris B
-        self.kolMatB = len(self.matrix_B[0]) # jumlah kolom B
- 
-        # buat matrix kosong --> hasil proses aritmatika
-        self.buatMatrixHasil(self.barMatA, self.kolMatB)
- 
-        self.buatMenu()
-         
-    def buatMenu(self):
-        Menu ="""
-=======  PROGRAM ARITMATIKA MATRIKS  =======
-     
-Pilihan Metode Aritmatika:
-(1) Penjumlahan Matriks
-(2) Pengurangan Matriks
-(3) Perkalian Matriks
-(4) Keluar
- 
-Silahkan Pilih Menu (1-4): """
- 
-        status = 0  # mati
-        while not status:
-            pilihan = input(Menu)
-             
-            print()
-            print('Pilihan Anda: ', pilihan)
-            print()
- 
-            if pilihan not in '1234':
-                print('Pilihan Anda SALAH! Masukkan 1 - 4.')
-                print()
-            else:
-                if pilihan == '4':
-                    status = 1  # hidup
-                elif pilihan == '1':
-                    self.jumlahMatrix()
-                elif pilihan == '2':
-                    self.kurangMatrix()
-                elif pilihan == '3':
-                    self.kaliMatrix()
-                 
-                 
-    def buatMatrixHasil(self, baris, kolom):
-        self.matrix_Hasil = []
-        for i in range(baris):
-            data = []
-            for j in range(kolom):
-                data.append(0)      # berisi data 0
-            self.matrix_Hasil.append(data)
-         
-    def jumlahMatrix(self):
-        # proses penjumlahan Matrix
-        for i in range(self.barMatA):
-            for j in range(self.kolMatA):
-                self.matrix_Hasil[i][j] = self.matrix_A[i][j] + self.matrix_B[i][j]
- 
-        print('Matrix A: ', self.matrix_A)
-        print('Matrix B: ', self.matrix_B)
-        print('Matrix A + B: ', self.matrix_Hasil)
-                 
-    def kurangMatrix(self):
-        # proses pengurangan Matrix
-        for i in range(self.barMatA):
-            for j in range(self.kolMatA):
-                self.matrix_Hasil[i][j] = self.matrix_A[i][j] - self.matrix_B[i][j]
- 
-        print('Matrix A: ', self.matrix_A)
-        print('Matrix B: ', self.matrix_B)
-        print('Matrix A - B: ', self.matrix_Hasil)
- 
-    def kaliMatrix(self):
-        # proses perkalian Matrix
-        for i in range(self.barMatA):
-            for j in range(self.kolMatB):
-                for k in range(self.barMatB):
-                    self.matrix_Hasil[i][j] += self.matrix_A[i][k] * self.matrix_B[k][j]
- 
-        print('Matrix A: ', self.matrix_A)
-        print('Matrix B: ', self.matrix_B)
-        print('Matrix A x B: ', self.matrix_Hasil)
- 
- 
-if __name__ == '__main__':
-    program = Matriks()
+    def __init__(self, data):
+        self.data = data
+
+    # penjumlahan 
+    def m0(self):
+        try:
+            matriks1 = self.data['matriks1']
+            matriks2 = self.data['matriks2']
+            result = []
+            # print('success')
+            for x in range(0, len(matriks1)):
+                for y in range(0, len(matriks1[0])):
+                    result.append(matriks1[x][y] + matriks2[x][y], end=' ')
+
+            # print(str(result))
+            return result
+        except:
+            return 'invalid data parameter'
+
+    # pengurangan 
+    def m1(self):
+        try:
+            matriks1 = self.data['matriks1']
+            matriks2 = self.data['matriks2']
+            result = []
+            # print('success')
+            for x in range(0, len(matriks1)):
+                for y in range(0, len(matriks1[0])):
+                    result.append(matriks1[x][y] + matriks2[x][y], end=' ')
+
+            # print(str(result))
+            return result
+        except:
+            return 'invalid data parameter'
+
+    # perkalian 
+    def m2(self):
+        try:
+            matriks1 = self.data['matriks1']
+            matriks2 = self.data['matriks2']
+            result = []
+            # print('success')
+            for x in range(0, len(matriks1)):
+                row = []
+                for y in range(0, len(matriks1[0])):
+                    total = 0
+                    for z in range(0, len(matriks1)):
+                        total = total + (matriks1[x][z] * matriks2[z][y])
+                    row.append(total)
+                result.append(row)
+
+            for x in range(0, len(result)):
+                for y in range(0, len(result[0])):
+                    print (result[x][y], end=' ')
+
+            # print(str(result))
+            return result
+        except:
+            return 'invalid data parameter'
+
+    # determinan 
+    def m3(self):
+        try:
+            matriks1 = self.data['matriks1']
+            matriks2 = self.data['matriks2']
+            matriks3 = self.data['matriks3']
+
+            result = (matriks1[0]*matriks2[1]*matriks3[2] + matriks1[1]*matriks2[2]*matriks3[0] + matriks1[2]*matriks2[0]*matriks3[1] - matriks3[0]*matriks2[1]*matriks1[2] - matriks3[1]*matriks2[2]*matriks1[0] - matriks3[2]*matriks2[0]*matriks1[1])
+            return result
+        except:
+            return 'invalid data parameter'
+
+    # transpose 
+    def m4(self):
+        try:
+            matriks1 = self.data['matriks1']
+            result = []
+
+            for i in range(len(matriks1)):
+                for j in range(len(matriks1)):
+                    result.append(matriks1[j][i])
+            return result
+        except:
+            return 'invalid data parameter'
+
+
+matriks = Matriks({'matriks1': [[1, 2, 3, 4, 5], [2, 6, 7, 4, 5]]})
+print(str(matriks.m4()))
